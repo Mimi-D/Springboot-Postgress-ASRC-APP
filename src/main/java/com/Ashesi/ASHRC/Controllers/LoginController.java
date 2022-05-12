@@ -4,6 +4,7 @@ import com.Ashesi.ASHRC.Model.LoginDetails;
 import com.Ashesi.ASHRC.Model.UserDetails;
 import com.Ashesi.ASHRC.RepositoriesDAO.LoginRepository;
 import com.Ashesi.ASHRC.RepositoriesDAO.UserRepository;
+import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.List;
 // This is the login controller to handle login operations
 @Controller
 @RequestMapping("/ASHRCportal")
+
+@AllArgsConstructor
 public class LoginController {
 
     // Required repositories to help implement needed methods
@@ -41,6 +44,7 @@ public class LoginController {
     public String displayLoginPage(Model model) {
         LoginDetails newLogin = new LoginDetails();
         model.addAttribute("login_details", newLogin);
+        System.out.println("SUCCESS");
         return "loginPage";
     }
 
@@ -48,6 +52,7 @@ public class LoginController {
     public String displayLoginPageError(Model model) {
         LoginDetails newLogin = new LoginDetails();
         model.addAttribute("login_details", newLogin);
+        System.out.println("SUCCESS");
         return "ErrorLoginPage";
     }
 
@@ -75,12 +80,14 @@ public class LoginController {
                 HttpSession session=request.getSession();
                 session.setAttribute("mail",results.get(0).getEmail());
                 model.addAttribute("loggedInAdmin",results.get(0));
+                System.out.println("SUCCESS");
                 return "redirect:/admin/dashboard";}
 
-            else{ return "redirect:/ASHRCportal/loginError";}
+            else{ System.out.println("FAIL"); return "redirect:/ASHRCportal/loginError";}
 
         }
         // If login fails redirect to login page
+        System.out.println("FAIL");
         return "redirect:/ASHRCportal/loginError";
     }
 
@@ -91,6 +98,7 @@ public class LoginController {
         }
         return false;
     }
+
 
 
 }

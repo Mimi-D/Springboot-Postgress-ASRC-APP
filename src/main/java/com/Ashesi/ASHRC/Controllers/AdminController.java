@@ -6,6 +6,7 @@ import com.Ashesi.ASHRC.RepositoriesDAO.LoginRepository;
 import com.Ashesi.ASHRC.RepositoriesDAO.RespondentIncidentRepository;
 import com.Ashesi.ASHRC.RepositoriesDAO.RespondentRepository;
 import com.Ashesi.ASHRC.RepositoriesDAO.UserRepository;
+import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminController {
 
     // Required repositories to help implement needed methods
@@ -320,6 +322,7 @@ public class AdminController {
         Long newlyReceived = (Long) queryN.uniqueResult();
         model.addAttribute("newlyReceived",newlyReceived);
 
+        System.out.println("SUCCESS");
         return "Settings";
     }
 
@@ -577,6 +580,7 @@ public class AdminController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         session.invalidate();
+        System.out.println("SUCCESS");
         return "redirect:/ASHRCportal/login";
     }
 }
